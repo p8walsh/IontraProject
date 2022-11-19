@@ -22,7 +22,8 @@ jobs:
     
     # Map the helloWorld output so that it can be used by later jobs
     outputs:
-      output1: ${{ steps.buildStep.outputs.test }}
+      testOutput: ${{ steps.testStep.outputs.test }}
+      helloWorld: ${{ steps.buildStep.outputs.test }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,6 +36,9 @@ jobs:
         
       - name: See what the file system looks like
         run: ls
+        
+      - id: testStep
+        run: echo "test=hello" >> $GITHUB_OUTPUT
         
       - id: buildStep
         run: gcc tempHelloWorld.c -o helloWorld >> $GITHUB_OUTPUT
@@ -50,7 +54,7 @@ jobs:
         run: ls
         
       - name: Check if output worked as I expected
-        run: echo ${{needs.build.outputs.output1}}
+        run: echo ${{needs.build.outputs.testOutput}}
         
       - name: Try running helloWorld
         run: helloWorld
