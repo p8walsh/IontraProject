@@ -32,8 +32,8 @@ jobs:
       - name: See what the file system looks like
         run: ls
         
-      - name: Try building tempHelloWorld.c
-        run: gcc tempHelloWorld.c -o helloWorld
+      - name: Try building STM32_RGB_LED_INTF.c
+        run: make 
 
-      - name: Try running helloWorld
-        run: ./helloWorld
+      - name: Try running main.exe
+        run: ./main.exe
