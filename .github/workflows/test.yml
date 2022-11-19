@@ -34,6 +34,12 @@ jobs:
         
       - name: Try building tempHelloWorld.c
         run: gcc tempHelloWorld.c -o helloWorld
+
+      - name: See if helloWorld exists before
+        run: ls
         
       - name: Try running helloWorld
         run: helloWorld
+
+      - name: See if helloWorld exists after
+        run: ls
