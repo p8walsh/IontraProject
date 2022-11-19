@@ -39,7 +39,7 @@ jobs:
         run: ls
         
       - name: Try running helloWorld
-        run: helloWorld
+        run: ./helloWorld
 
       - name: See if helloWorld exists after
         run: ls
