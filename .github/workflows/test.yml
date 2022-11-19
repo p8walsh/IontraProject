@@ -19,6 +19,10 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
+    # Map the helloWorld output so that it can be used by later jobs
+    outputs:
+      output1: ${{ steps.buildStep.outputs.test }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,7 +37,11 @@ jobs:
         run: ls
         
       - name: Try building tempHelloWorld.c
-        run: gcc tempHelloWorld.c -o helloWorld
+      - id: buildStep
+        run: gcc tempHelloWorld.c -o helloWorld >> $GITHUB_OUTPUT
+        
+      - name: Check that helloWorld is actually created
+        run: ls
 
   execute:
     runs-on: ubuntu-latest
@@ -41,6 +49,9 @@ jobs:
     steps:
       - name: Check to see if files persisted or if I need an environment/something similar
         run: ls
+        
+      - name: Check if output worked as I expected
+        run: echo ${{needs.build.outputs.output1}}
         
       - name: Try running helloWorld
         run: helloWorld
