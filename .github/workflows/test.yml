@@ -36,7 +36,6 @@ jobs:
       - name: See what the file system looks like
         run: ls
         
-      - name: Try building tempHelloWorld.c
       - id: buildStep
         run: gcc tempHelloWorld.c -o helloWorld >> $GITHUB_OUTPUT
         
