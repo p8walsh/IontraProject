@@ -3,10 +3,7 @@
 
 // Initialize all new LEDs to bright white
 typedef struct {
-    int redVal = 255;
-    int greenVal = 255;
-    int blueVal = 255;
-    int brightness = 100;
+    int redVal, greenVal, blueVal, brightness;
 } Led;
 
 // Initialize the LED objects
