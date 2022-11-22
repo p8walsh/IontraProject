@@ -1,4 +1,4 @@
 all: main.exe
 
-main.exe: STM32_RGB_LED_INTF.c 
-	gcc -o main.exe -v -Wall -Wextra STM32_RGB_LED_INTF.c 
+main.exe: Iontra_RGB_LED_INTF.c LED.h
+	gcc -o main.exe -v -Wall -Wextra Iontra_RGB_LED_INTF.c 

@@ -32,7 +32,7 @@ jobs:
       - name: See what the file system looks like
         run: ls
         
-      - name: Try building STM32_RGB_LED_INTF.c
+      - name: Try building Iontra_RGB_LED_INTF.c
         run: make 
 
       - name: Try running main.exe
