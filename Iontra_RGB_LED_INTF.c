@@ -29,10 +29,10 @@ int main(void){
     }
     
     // Test that the LEDs inside ledArray got initialized like I think
-    printf(ledArray[0].redVal);
-    printf(ledArray[0].greenVal);
-    printf(ledArray[0].blueVal);
-    printf(ledArray[0].brightness);
+    printf("%d", ledArray[0].redVal);
+    printf("%d", ledArray[0].greenVal);
+    printf("%d", ledArray[0].blueVal);
+    printf("%d", ledArray[0].brightness);
 
     return 0;
 }
