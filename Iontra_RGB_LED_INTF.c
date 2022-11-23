@@ -13,7 +13,12 @@ int change_LED_Brightness(Led* led, int targetBrightness){
 
 // Change the color of the given LEDobject LED based on the RGB values given.
 // *RGB values could be uint8, as they range from 0-255*
-int change_LED_Color(Led* led, int newRedVal, int newGreenVal, int newBlueVal){
+int change_LED_Color(Led* led_pointer, int newRedVal, int newGreenVal, int newBlueVal){
+    Led led = *led_pointer;
+    printf("redVal: %d, ", led.redVal);
+    printf("greenVal: %d, ", led.greenVal);
+    printf("blueVal: %d, ", led.blueVal);
+    printf("brightness: %d.", led.brightness);
     return 0;
 }
 
@@ -30,11 +35,12 @@ int main(void){
     
     // Test that the LEDs inside ledArray got initialized like I think
     for( int i=0; i<5; i++){
-        printf("\nLED %d: ", i);
-        printf("redVal: %d, ", ledArray[i].redVal);
-        printf("greenVal: %d, ", ledArray[i].greenVal);
-        printf("blueVal: %d, ", ledArray[i].blueVal);
-        printf("brightness: %d, ", ledArray[i].brightness);
+        change_LED_Color(&ledArray[i], 0, 0, 255);
+    //    printf("\nLED %d: ", i);
+    //    printf("redVal: %d, ", ledArray[i].redVal);
+    //   printf("greenVal: %d, ", ledArray[i].greenVal);
+    //    printf("blueVal: %d, ", ledArray[i].blueVal);
+    //   printf("brightness: %d.", ledArray[i].brightness);
     }
 
     return 0;
