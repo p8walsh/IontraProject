@@ -139,7 +139,7 @@ int main(void){
 
     // Change a single LED's color in an invalid way
     result = change_LED_Color(&ledArray[0], 256, -1, 100000);
-    if ( ( ledArray[0].redVal == 256 ) || ( ledArray[0].greenVal == -1 ) || ( ledArray[0].blueVal = 100000 ) || ( result == 0 ) ){
+    if ( ( ledArray[0].redVal == 256 ) || ( ledArray[0].greenVal == -1 ) || ( ledArray[0].blueVal == 100000 ) || ( result == 0 ) ){
         return 2;
     }
 
