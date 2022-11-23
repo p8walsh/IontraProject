@@ -7,7 +7,7 @@ typedef struct {
 } Led;
 
 // Initialize the LED objects
-int init_LEDs(Led* ledArray);
+int init_LEDs(Led* ledArray, int length);
 
 // Change the brightness of the given LEDobject to a value given by targetBrightness (between 0-100) 
 int change_LED_Brightness(Led* led, int targetBrightness);
