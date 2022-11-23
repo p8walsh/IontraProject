@@ -2,7 +2,7 @@
 #include "LED.h"
 
 // Initialize the LED objects
-int init_LEDs(Led* ledArray){
+int init_LEDs(Led* ledArray, int length){
     return 0;
 }
 
@@ -22,6 +22,16 @@ int change_LED_Color(Led* led_pointer, int newRedVal, int newGreenVal, int newBl
     return 0;
 }
 
+void printLEDs(Led* ledArray, int length){
+    for( int i=0; i<length; i++){
+        printf("\nLED %d: ", i);
+        printf("redVal: %d, ", ledArray[i].redVal);
+        printf("greenVal: %d, ", ledArray[i].greenVal);
+        printf("blueVal: %d, ", ledArray[i].blueVal);
+        printf("brightness: %d.", ledArray[i].brightness);
+    }
+}
+
 int main(void){
     // Create an empty array that can hold up to 5 Led structs
     Led ledArray[5];
@@ -34,14 +44,7 @@ int main(void){
     }
     
     // Test that the LEDs inside ledArray got initialized like I think
-    for( int i=0; i<5; i++){
-        change_LED_Color(&ledArray[i], 0, 0, 255);
-    //    printf("\nLED %d: ", i);
-    //    printf("redVal: %d, ", ledArray[i].redVal);
-    //   printf("greenVal: %d, ", ledArray[i].greenVal);
-    //    printf("blueVal: %d, ", ledArray[i].blueVal);
-    //   printf("brightness: %d.", ledArray[i].brightness);
-    }
+    printLEDs(ledArray, 5);
 
     return 0;
 }
