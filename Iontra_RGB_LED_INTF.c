@@ -29,11 +29,9 @@ int change_LED_Brightness(Led* led_pointer, int newBrightness){
         return 1;
     }
     
-    Led led = *led_pointer;
-    
-    led.brightness = newBrightness;
+    led_pointer->brightness = newBrightness;
 
-    printf("\nLED brightness: %d", led.brightness);
+    printf("\nLED brightness: %d", led_pointer->brightness);
     
     return 0;
 }
