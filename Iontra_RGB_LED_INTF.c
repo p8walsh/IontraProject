@@ -106,12 +106,14 @@ int main(void){
     // Change a single LED's brightness in a valid way
     int result = change_LED_Brightness(&ledArray[0], 30);
     if ( ledArray[0].brightness != 30 ){
+        printf("Error changing a single LED's brightness in a valid way");
         return 2;
     }
 
     // Try changing a single LED's brightness in an invalid way
     result = change_LED_Brightness(&ledArray[0], -1);
     if ( ( result == 0 ) || (ledArray[0].brightness == -1 ) ){
+        printf("Error changing a single LED's brightness in an invalid way");
         return 2;
     }
 
@@ -119,12 +121,14 @@ int main(void){
     for ( int i=0; i<length; i++){
         result = change_LED_Brightness(&ledArray[i], i % 255);
         if ( ( result != 0 ) || ( ledArray[i].brightness != (i % 255) ) ){
+            printf("Error changing all LED's brightnesses in a valid way during assignment");
             return 2;
         }
     }
     // Make sure none of the LED's brightnesses affected each other
     for ( int i=0; i<length; i++){
         if ( ledArray[i].brightness != (i % 255) ){
+            printf("Error changing all LED's brightnesses in a valid way after assignment");
             return 2;
         }
     }
@@ -134,12 +138,14 @@ int main(void){
     // Change a single LED's color in a valid way
     result = change_LED_Color(&ledArray[0], 30, 60, 90);
     if ( ( ledArray[0].redVal != 30 ) || ( ledArray[0].greenVal != 60 ) || ( ledArray[0].blueVal != 90 ) ){
+        printf("Error changing a single LED's color in a valid way");
         return 2;
     }
 
     // Change a single LED's color in an invalid way
     result = change_LED_Color(&ledArray[0], 256, -1, 100000);
     if ( ( ledArray[0].redVal == 256 ) || ( ledArray[0].greenVal == -1 ) || ( ledArray[0].blueVal == 100000 ) || ( result == 0 ) ){
+        printf("Error changing a single LED's color in an invalid way");
         return 2;
     }
 
