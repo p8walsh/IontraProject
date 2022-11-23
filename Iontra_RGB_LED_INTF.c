@@ -10,6 +10,7 @@ int init_LEDs(Led* ledArray, int length){
         return 1;
     }
 
+    // Initialize LEDs to bright white - easiest to see if there is a problem
     for ( int i=0; i<length; i++ ){
         ledArray[i].redVal = 255;
         ledArray[i].greenVal = 255;
@@ -29,7 +30,9 @@ int change_LED_Brightness(Led* led_pointer, int newBrightness){
     }
     
     Led led = *led_pointer;
+    
     led.brightness = newBrightness;
+    
     return 0;
 }
 
@@ -51,6 +54,7 @@ int change_LED_Color(Led* led_pointer, int newRedVal, int newGreenVal, int newBl
     return 0;
 }
 
+// Prints out all the values in the ledArray
 void printLEDs(Led* ledArray, int length){
     for ( int i=0; i<length; i++ ){
         printf("\nLED %d: ", i);
@@ -65,6 +69,7 @@ void printLEDs(Led* ledArray, int length){
 // Return 1 if there is an initialization error
 // Return 2 if there is a problem with changing brightness
 // Return 3 if there is a problem with changing colors
+// *NOTE* TESTS SHOWN HERE ARE NOT EXHAUSTIVE
 int main(void){
     // Create an empty array that can hold up to 5 Led structs
     Led ledArray[5];
@@ -94,6 +99,42 @@ int main(void){
             printf("Error: brightness not initialized correctly. brightness: %d: ", ledArray[i].brightness);
             return 1;
         }
+    }
+
+    // Test changing brightness
+    
+    // Change a single LED's brightness in a valid way
+    int result = change_LED_Brightness(&ledArray[0], 30);
+    if ( ledArray[0].brightness != 30 ){
+        return 2;
+    }
+
+    // Try changing a single LED's brightness in an invalid way
+    result = change_LED_Brightness(&ledArray[0], -1);
+    if ( ( result == 0 ) || (ledArray[0].brightness == -1 ) ){
+        return 2;
+    }
+
+    // Try changing all the LED's brightnesses in a valid way
+    for ( int i=0; i<length; i++){
+        result = change_LED_Brightness(&ledArray[i], i % 255);
+        if ( ( result != 0 ) || ( ledArray[i].brightness != (i % 255) ) ){
+            return 2;
+        }
+    }
+    // Make sure none of the LED's brightnesses affected each other
+    for ( int i=0; i<length; i++){
+        if ( ledArray[i].brightness != (i % 255) ){
+            return 2;
+        }
+    }
+
+    // Test changing color
+
+     // Change a single LED's color in a valid way
+    int result = change_LED_Color(&ledArray[0], 30, 60, 90);
+    if ( ( ledArray[0].redVal != 30 ) && ( ledArray[0].greenVal != 60 ) && ( ledArray[0].blueVal != 90 )){
+        return 2;
     }
 
     return 0;
