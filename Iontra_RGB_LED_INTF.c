@@ -2,28 +2,57 @@
 #include "LED.h"
 
 // Initialize the LED objects
+// Return 0: LEDs successfully initialized
+// Return 1: One or more of the input values was out of bounds
 int init_LEDs(Led* ledArray, int length){
+    // length cannot be less than 1 because that would result in errors further on
+    if ( length < 1 ){
+        return 1;
+    }
+
+    for ( int i=0; i<length; i++ ){
+        ledArray[i].redVal = 255;
+        ledArray[i].greenVal = 255;
+        ledArray[i].blueVal = 255;
+        ledArray[i].brightness = 100;
+    }
+    
     return 0;
 }
 
-// Change the brightness of the given LEDobject to a value given by targetBrightness (between 0-100) 
-int change_LED_Brightness(Led* led, int targetBrightness){
+// Change the brightness of the given LEDobject to a value given by targetBrightness (between 0-100)
+// Return 0: Brightness successfully changed
+// Return 1: One or more of the input values was out of bounds 
+int change_LED_Brightness(Led* led_pointer, int newBrightness){
+    if ( (newBrightness < 0) || (newBrightness > 100) ){
+        return 1;
+    }
+    
+    Led led = *led_pointer;
+    led.brightness = newBrightness;
     return 0;
 }
 
 // Change the color of the given LEDobject LED based on the RGB values given.
-// *RGB values could be uint8, as they range from 0-255*
+// Return 0: Colors successfully changed
+// Return 1: One or more of the input values was out of bounds
+// *RGB values could be uint8, as they range from 0-255* - not done here because I don't think uint8 is native to C
 int change_LED_Color(Led* led_pointer, int newRedVal, int newGreenVal, int newBlueVal){
+    if ( ( (newRedVal > 255) || (newRedVal < 0) ) || ( (newGreenVal > 255) || (newGreenVal < 0) ) || ( (newBlueVal > 255) || (newBlueVal < 0) ) ){
+        return 1;
+    }
+    
     Led led = *led_pointer;
-    printf("redVal: %d, ", led.redVal);
-    printf("greenVal: %d, ", led.greenVal);
-    printf("blueVal: %d, ", led.blueVal);
-    printf("brightness: %d.", led.brightness);
+    
+    led.redVal = newRedVal;
+    led.greenVal = newGreenVal;
+    led.blueVal = newBlueVal;
+
     return 0;
 }
 
 void printLEDs(Led* ledArray, int length){
-    for( int i=0; i<length; i++){
+    for ( int i=0; i<length; i++ ){
         printf("\nLED %d: ", i);
         printf("redVal: %d, ", ledArray[i].redVal);
         printf("greenVal: %d, ", ledArray[i].greenVal);
@@ -32,19 +61,40 @@ void printLEDs(Led* ledArray, int length){
     }
 }
 
+// Return 0 if everything works correctly
+// Return 1 if there is an initialization error
+// Return 2 if there is a problem with changing brightness
+// Return 3 if there is a problem with changing colors
 int main(void){
     // Create an empty array that can hold up to 5 Led structs
     Led ledArray[5];
 
-    for( int i=0; i<5; i++){
-        ledArray[i].redVal = 255;
-        ledArray[i].greenVal = 255;
-        ledArray[i].blueVal = 255;
-        ledArray[i].brightness = 100;
-    }
+    // Use a variable to hold length for easy modification
+    int length = 5;
+    init_LEDs(ledArray, length);
     
     // Test that the LEDs inside ledArray got initialized like I think
-    printLEDs(ledArray, 5);
+    printLEDs(ledArray, length);
+    
+    // Use code to test what is being visually confirmed above
+    for ( int i=0; i<length; i++ ){
+        if ( ledArray[i].redVal != 255 ){
+            printf("Error: redVal not initialized correctly. redVal: %d: ", ledArray[i].redVal);
+            return 1;
+        }
+        if ( ledArray[i].greenVal != 255 ){
+            printf("Error: greenVal not initialized correctly. greenVal: %d: ", ledArray[i].greenVal);
+            return 1;
+        }
+        if ( ledArray[i].blueVal != 255 ){
+            printf("Error: blueVal not initialized correctly. blueVal: %d: ", ledArray[i].blueVal);
+            return 1;
+        }
+        if ( ledArray[i].brightness != 100 ){
+            printf("Error: brightness not initialized correctly. brightness: %d: ", ledArray[i].brightness);
+            return 1;
+        }
+    }
 
     return 0;
 }
