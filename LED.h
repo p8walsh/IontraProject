@@ -1,7 +1,7 @@
 #ifndef LED
 #define LED
 
-// Initialize all new LEDs to bright white
+// redVal, greenVal, and blueVal are essentially booleans
 typedef struct {
     int redVal, greenVal, blueVal, brightness;
 } Led;
