@@ -131,9 +131,15 @@ int main(void){
 
     // Test changing color
 
-     // Change a single LED's color in a valid way
-    int result = change_LED_Color(&ledArray[0], 30, 60, 90);
-    if ( ( ledArray[0].redVal != 30 ) && ( ledArray[0].greenVal != 60 ) && ( ledArray[0].blueVal != 90 )){
+    // Change a single LED's color in a valid way
+    result = change_LED_Color(&ledArray[0], 30, 60, 90);
+    if ( ( ledArray[0].redVal != 30 ) || ( ledArray[0].greenVal != 60 ) || ( ledArray[0].blueVal != 90 ) ){
+        return 2;
+    }
+
+    // Change a single LED's color in an invalid way
+    result = change_LED_Color(&ledArray[0], 256, -1, 100000);
+    if ( ( ledArray[0].redVal == 256 ) || ( ledArray[0].greenVal == -1 ) || ( ledArray[0].blueVal = 100000 ) || ( result = 0 ) ){
         return 2;
     }
 
